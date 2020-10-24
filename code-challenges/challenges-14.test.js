@@ -12,11 +12,28 @@ const createServer = () => {
   const express = require('express');
   const app = express();
 
-  // solution code goes here ...
+   // solution code goes here ...
+  app.get('/', (request, response) => {
+  response.status(200).send('on route')
+});
+ 
+app.delete('/things/1', (request, response) => {
+  response.status(405).send('dead end')
+});
+
+  app.get('*', (request, response) => {
+    response.status(404).send('not found')
+  });
+
+  //  }  {
+  //  response.status(505).send('dead end');
+  //  }
+  // });
 
   var server = app.listen(3000, function () {
     var port = server.address().port;
     console.log('Example app listening at port', port);
+  
   });
   return server;
 };
@@ -31,6 +48,9 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 
 const toTitleCase = (arr) => {
   // Solution code here...
+  return arr.map((str) => {
+    return str[0].toUpperCase() + str.slice(1);
+  } )
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -105,8 +125,14 @@ let starWarsData = [{
 }];
 
 let biggerThanLuke = (arr) => {
-  // Solution code here...
-};
+  return arr.filter(moreMass => moreMass.mass > 77)
+    .map((person) => {
+      return person.name 
+     
+    })
+}
+console.log(biggerThanLuke(starWarsData));
+//console.log(starWarsData.join('-'));
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -123,7 +149,7 @@ This data could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  // Solution code here...
+  return arr.sort((a,b) => a.property - b.property)
 };
 
 /* ------------------------------------------------------------------------------------------------
